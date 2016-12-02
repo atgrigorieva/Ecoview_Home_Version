@@ -486,7 +486,7 @@ namespace Ecoview_Home_Version
                                         {
                                             SA = new int[40];
                                             GE = new int[40];
-                                            Table1CountIzmer = 39;
+                                            Table1CountIzmer = 38;
                                             Table1StartIzmer = 0;
                                             IzmerSAGE();
                                         }
@@ -523,7 +523,8 @@ namespace Ecoview_Home_Version
                 // Table1.Rows.Add();
                 if (checkBox1.Checked == true && checkBox2.Checked == false && checkBox3.Checked == false)
                 {
-                  
+                    GEIzmer = new double[13];
+                    GEIzmer_1 = new double[13];
                     Table1CountIzmer = 12;
                     Table1StartIzmer = 0;
                     IzmerGE();
@@ -533,7 +534,8 @@ namespace Ecoview_Home_Version
                 {
                     if (checkBox2.Checked == true && checkBox1.Checked == false && checkBox3.Checked == false)
                     {
-                      
+                        GEIzmer = new double[13];
+                        GEIzmer_1 = new double[13];
                         Table1CountIzmer = 25;
                         Table1StartIzmer = 13;
                         IzmerGE();
@@ -542,7 +544,8 @@ namespace Ecoview_Home_Version
                     {
                         if (checkBox3.Checked == true && checkBox1.Checked == false && checkBox2.Checked == false)
                         {
-                            
+                            GEIzmer = new double[13];
+                            GEIzmer_1 = new double[13];
                             Table1CountIzmer = 38;
                             Table1StartIzmer = 26;
                             IzmerGE();
@@ -551,7 +554,9 @@ namespace Ecoview_Home_Version
                         {
                             if (checkBox1.Checked == true && checkBox2.Checked == true && checkBox3.Checked == false)
                             {
-                              
+                                GEIzmer = new double[26];
+                                GEIzmer_1 = new double[13];
+                                GEIzmer_2 = new double[13];
                                 Table1CountIzmer = 25;
                                 Table1StartIzmer = 0;
                                 IzmerGE();
@@ -560,7 +565,9 @@ namespace Ecoview_Home_Version
                             {
                                 if (checkBox1.Checked == true && checkBox3.Checked == true && checkBox2.Checked == false)
                                 {
-                                    
+                                    GEIzmer = new double[26];
+                                    GEIzmer_1 = new double[13];
+                                    GEIzmer_2 = new double[13];
                                     Table1StartIzmer = 0;
                                     Table1CountIzmer = 12;
                                     IzmerGE();
@@ -572,7 +579,9 @@ namespace Ecoview_Home_Version
                                 {
                                     if (checkBox2.Checked == true && checkBox3.Checked == true && checkBox1.Checked == false)
                                     {
-                                        
+                                        GEIzmer = new double[26];
+                                        GEIzmer_1 = new double[13];
+                                        GEIzmer_2 = new double[13];
                                         Table1CountIzmer = 38;
                                         Table1StartIzmer = 13;
                                         IzmerGE();
@@ -581,8 +590,11 @@ namespace Ecoview_Home_Version
                                     {
                                         if (checkBox1.Checked == true && checkBox2.Checked == true && checkBox3.Checked == true)
                                         {
-                                           
-                                            Table1CountIzmer = 39;
+                                            GEIzmer = new double[39];
+                                            GEIzmer_1 = new double[13];
+                                            GEIzmer_2 = new double[13];
+                                            GEIzmer_3 = new double[13];
+                                            Table1CountIzmer = 38;
                                             Table1StartIzmer = 0;
                                             IzmerGE();
                                         }
@@ -595,6 +607,146 @@ namespace Ecoview_Home_Version
                 countIzmer++;
                 Table1.Rows.Add();
                 Table1.CurrentCell = Table1.Rows[countIzmer].Cells[0];
+
+                if (checkBox1.Checked == true && checkBox2.Checked == false && checkBox3.Checked == false)
+                {
+                    for (int i = 0; i < 13; i++)
+                    {
+                        GEIzmer_1[i] = GEIzmer[i];
+                    }
+                    Array.Sort(GEIzmer_1);                   
+                    double minEl = GEIzmer_1[0];
+                    textBox1.Text = string.Format("{0:0.00}", minEl);
+                    textBox2.Text = "";
+                    textBox3.Text = "";
+                }
+                else
+                {
+                    if (checkBox2.Checked == true && checkBox1.Checked == false && checkBox3.Checked == false)
+                    {
+                        for (int i = 0; i < 13; i++)
+                        {
+                            GEIzmer_1[i] = GEIzmer[i];
+                        }
+                        Array.Sort(GEIzmer_1);
+                        double minEl = GEIzmer_1[0];
+                        textBox1.Text = string.Format("{0:0.00}", minEl);
+                        textBox2.Text = "";
+                        textBox3.Text = "";
+
+                    }
+                    else
+                    {
+                        if (checkBox3.Checked == true && checkBox1.Checked == false && checkBox2.Checked == false)
+                        {
+                            for (int i = 0; i < 13; i++)
+                            {
+                                GEIzmer_1[i] = GEIzmer[i];
+                            }
+                            Array.Sort(GEIzmer_1);
+                            double minEl = GEIzmer_1[0];
+                            textBox1.Text = string.Format("{0:0.00}", minEl);
+                            textBox2.Text = "";
+                            textBox3.Text = "";
+                        }
+                        else
+                        {
+                            if (checkBox1.Checked == true && checkBox2.Checked == true && checkBox3.Checked == false)
+                            {
+                                for (int i = 0; i < 13; i++)
+                                {
+                                    GEIzmer_1[i] = GEIzmer[i];
+                                }
+                                for (int i = 14; i < 26; i++)
+                                {
+                                    GEIzmer_2[i] = GEIzmer[i];
+                                }
+                                for (int i = 0; i < 13; i++)
+                                {
+                                    GEIzmer_1[i] = GEIzmer[i];
+                                }
+                                Array.Sort(GEIzmer_1);
+                                double minEl = GEIzmer_1[0];
+                                textBox1.Text = string.Format("{0:0.00}", minEl);
+                                Array.Sort(GEIzmer_2);
+                                double minEl_2 = GEIzmer_2[0];
+                                textBox2.Text = string.Format("{0:0.00}", minEl_2);
+                                textBox3.Text = "";
+                            }
+                            else
+                            {
+                                if (checkBox1.Checked == true && checkBox3.Checked == true && checkBox2.Checked == false)
+                                {
+                                    for (int i = 0; i < 13; i++)
+                                    {
+                                        GEIzmer_1[i] = GEIzmer[i];
+                                    }
+                                    for (int i = 14; i < 26; i++)
+                                    {
+                                        GEIzmer_2[i] = GEIzmer[i];
+                                    }
+                                    Array.Sort(GEIzmer_1);
+                                    double minEl = GEIzmer_1[0];
+                                    textBox1.Text = string.Format("{0:0.00}", minEl);
+                                    Array.Sort(GEIzmer_2);
+                                    double minEl_2 = GEIzmer_2[0];
+                                    textBox2.Text = string.Format("{0:0.00}", minEl_2);
+                                    textBox3.Text = "";
+
+                                }
+                                else
+                                {
+                                    if (checkBox2.Checked == true && checkBox3.Checked == true && checkBox1.Checked == false)
+                                    {
+                                        for (int i = 0; i < 13; i++)
+                                        {
+                                            GEIzmer_1[i] = GEIzmer[i];
+                                        }
+                                        for (int i = 14; i < 26; i++)
+                                        {
+                                            GEIzmer_2[i] = GEIzmer[i];
+                                        }
+                                        Array.Sort(GEIzmer_1);
+                                        double minEl = GEIzmer_1[0];
+                                        textBox1.Text = string.Format("{0:0.00}", minEl);
+                                        Array.Sort(GEIzmer_2);
+                                        double minEl_2 = GEIzmer_2[0];
+                                        textBox2.Text = string.Format("{0:0.00}", minEl_2);
+                                        textBox3.Text = "";
+                                    }
+                                    else
+                                    {
+                                        if (checkBox1.Checked == true && checkBox2.Checked == true && checkBox3.Checked == true)
+                                        {
+                                            
+                                            for (int i = 0; i < 13; i++)
+                                            {
+                                                GEIzmer_1[i] = GEIzmer[i];
+                                            }
+                                            for (int i = 14; i < 26; i++)
+                                            {
+                                                GEIzmer_2[i] = GEIzmer[i];
+                                            }
+                                            for (int i = 27; i < 39; i++)
+                                            {
+                                                GEIzmer_3[i] = GEIzmer[i];
+                                            }
+                                            Array.Sort(GEIzmer_1);
+                                            double minEl = GEIzmer_1[0];
+                                            textBox1.Text = string.Format("{0:0.00}", minEl);
+                                            Array.Sort(GEIzmer_2);
+                                            double minEl_2 = GEIzmer_2[0];
+                                            textBox2.Text = string.Format("{0:0.00}", minEl_2);
+                                            Array.Sort(GEIzmer_3);
+                                            double minEl_3 = GEIzmer_3[0];
+                                            textBox3.Text = string.Format("{0:0.00}", minEl_3); ;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
             }
             else
             {
@@ -629,7 +781,10 @@ namespace Ecoview_Home_Version
       
         public int[] SA;
         public int[] GE;
-
+        public double[] GEIzmer;
+        public double[] GEIzmer_1;
+        public double[] GEIzmer_2;
+        public double[] GEIzmer_3;
         public int[] SA1;
         public int[] GE1;
         public int Table1CountIzmer;
@@ -889,6 +1044,7 @@ namespace Ecoview_Home_Version
                    // double GE1_double = double.Parse(GE1.Replace(".", ","));
                     double Aser = Convert.ToDouble(GE5Izmer) / Convert.ToDouble(GE[i]) * 100;
                     Table1.CurrentCell.Value = string.Format("{0:0.00}", Aser);
+                    GEIzmer[i] = Aser;
                     i++;
                 }
                 //Table1.Rows.Add();
@@ -1053,6 +1209,7 @@ namespace Ecoview_Home_Version
                     // double GE1_double = double.Parse(GE1.Replace(".", ","));
                     double Aser = Convert.ToDouble(GE5Izmer) / Convert.ToDouble(GE[i]) * 100;
                     Table1.CurrentCell.Value = string.Format("{0:0.00}", Aser);
+                GEIzmer[i] = Aser;
                 i++;
                 }
                 

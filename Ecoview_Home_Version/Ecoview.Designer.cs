@@ -126,7 +126,7 @@
             this.Table1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.Table1.Location = new System.Drawing.Point(6, 6);
             this.Table1.Name = "Table1";
-            this.Table1.Size = new System.Drawing.Size(1070, 361);
+            this.Table1.Size = new System.Drawing.Size(1334, 361);
             this.Table1.TabIndex = 0;
             // 
             // tabPage1
@@ -135,7 +135,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(1082, 373);
+            this.tabPage1.Size = new System.Drawing.Size(1346, 373);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "30 Волн";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -235,7 +235,7 @@
             this.tabControl1.Location = new System.Drawing.Point(9, 87);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1090, 399);
+            this.tabControl1.Size = new System.Drawing.Size(1354, 399);
             this.tabControl1.TabIndex = 28;
             // 
             // button4
@@ -310,7 +310,7 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(704, 31);
+            this.textBox1.Location = new System.Drawing.Point(869, 61);
             this.textBox1.Name = "textBox1";
             this.textBox1.ReadOnly = true;
             this.textBox1.Size = new System.Drawing.Size(100, 20);
@@ -318,7 +318,7 @@
             // 
             // textBox2
             // 
-            this.textBox2.Location = new System.Drawing.Point(810, 31);
+            this.textBox2.Location = new System.Drawing.Point(975, 61);
             this.textBox2.Name = "textBox2";
             this.textBox2.ReadOnly = true;
             this.textBox2.Size = new System.Drawing.Size(100, 20);
@@ -326,7 +326,7 @@
             // 
             // textBox3
             // 
-            this.textBox3.Location = new System.Drawing.Point(916, 31);
+            this.textBox3.Location = new System.Drawing.Point(1081, 61);
             this.textBox3.Name = "textBox3";
             this.textBox3.ReadOnly = true;
             this.textBox3.Size = new System.Drawing.Size(100, 20);
@@ -335,7 +335,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(701, 9);
+            this.label1.Location = new System.Drawing.Point(866, 39);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(0, 13);
             this.label1.TabIndex = 43;
@@ -343,7 +343,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(813, 9);
+            this.label2.Location = new System.Drawing.Point(978, 39);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(0, 13);
             this.label2.TabIndex = 44;
@@ -351,7 +351,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(922, 9);
+            this.label3.Location = new System.Drawing.Point(1087, 39);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(0, 13);
             this.label3.TabIndex = 45;
@@ -360,7 +360,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1108, 502);
+            this.ClientSize = new System.Drawing.Size(1372, 502);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);

@@ -124,8 +124,8 @@ namespace Ecoview_Home_Version
                     newPort.Parity = System.IO.Ports.Parity.None;
                     newPort.StopBits = System.IO.Ports.StopBits.One;
                     // Установка таймаутов чтения/записи (read/write timeouts)
-                    newPort.ReadTimeout = 20000;
-                    newPort.WriteTimeout = 20000;
+                    newPort.ReadTimeout = 500;
+                    newPort.WriteTimeout = 500;
                     //    newPort.DataReceived += new SerialDataReceivedEventHandler(newPort_DataReceived);
                     newPort.RtsEnable = false;
                     newPort.DtrEnable = true;
@@ -633,6 +633,9 @@ namespace Ecoview_Home_Version
                         textBox1.Text = string.Format("{0:0.00}", minEl);
                         textBox2.Text = "";
                         textBox3.Text = "";
+                        label1.Text = "от 428,0 до 582,5";
+                        label2.Text = "";
+                        label3.Text = "";
 
                     }
                     else
@@ -648,23 +651,25 @@ namespace Ecoview_Home_Version
                             textBox1.Text = string.Format("{0:0.00}", minEl);
                             textBox2.Text = "";
                             textBox3.Text = "";
+                            label1.Text = "от 428,0 до 582,5";
+                            label2.Text = "";
+                            label3.Text = "";
                         }
                         else
                         {
                             if (checkBox1.Checked == true && checkBox2.Checked == true && checkBox3.Checked == false)
                             {
+                                int massEl = 0;
                                 for (int i = 0; i < 13; i++)
                                 {
                                     GEIzmer_1[i] = GEIzmer[i];
                                 }
-                                for (int i = 14; i < 26; i++)
+                                for (int i = 13; i < 26; i++)
                                 {
-                                    GEIzmer_2[i] = GEIzmer[i];
+                                    GEIzmer_2[massEl] = GEIzmer[i];
+                                    massEl++;
                                 }
-                                for (int i = 0; i < 13; i++)
-                                {
-                                    GEIzmer_1[i] = GEIzmer[i];
-                                }
+                             
                                 Array.Sort(GEIzmer_1);
                                 double minEl = GEIzmer_1[0];
                                 textBox1.Text = string.Format("{0:0.00}", minEl);
@@ -672,18 +677,23 @@ namespace Ecoview_Home_Version
                                 double minEl_2 = GEIzmer_2[0];
                                 textBox2.Text = string.Format("{0:0.00}", minEl_2);
                                 textBox3.Text = "";
+                                label1.Text = "от 428,0 до 582,5";
+                                label2.Text = "от 582,5 до 682,0";
+                                label3.Text = "";
                             }
                             else
                             {
                                 if (checkBox1.Checked == true && checkBox3.Checked == true && checkBox2.Checked == false)
                                 {
+                                    int massEl = 0;
                                     for (int i = 0; i < 13; i++)
                                     {
                                         GEIzmer_1[i] = GEIzmer[i];
                                     }
-                                    for (int i = 14; i < 26; i++)
+                                    for (int i = 13; i < 26; i++)
                                     {
-                                        GEIzmer_2[i] = GEIzmer[i];
+                                        GEIzmer_2[massEl] = GEIzmer[i];
+                                        massEl++;
                                     }
                                     Array.Sort(GEIzmer_1);
                                     double minEl = GEIzmer_1[0];
@@ -692,19 +702,24 @@ namespace Ecoview_Home_Version
                                     double minEl_2 = GEIzmer_2[0];
                                     textBox2.Text = string.Format("{0:0.00}", minEl_2);
                                     textBox3.Text = "";
+                                    label1.Text = "от 428,0 до 582,5";
+                                    label2.Text = "от 682,0 до 688,0";
+                                    label3.Text = "";
 
                                 }
                                 else
                                 {
                                     if (checkBox2.Checked == true && checkBox3.Checked == true && checkBox1.Checked == false)
                                     {
+                                        int massEl = 0;
                                         for (int i = 0; i < 13; i++)
                                         {
                                             GEIzmer_1[i] = GEIzmer[i];
                                         }
-                                        for (int i = 14; i < 26; i++)
+                                        for (int i = 13; i < 26; i++)
                                         {
-                                            GEIzmer_2[i] = GEIzmer[i];
+                                            GEIzmer_2[massEl] = GEIzmer[i];
+                                            massEl++;
                                         }
                                         Array.Sort(GEIzmer_1);
                                         double minEl = GEIzmer_1[0];
@@ -713,23 +728,30 @@ namespace Ecoview_Home_Version
                                         double minEl_2 = GEIzmer_2[0];
                                         textBox2.Text = string.Format("{0:0.00}", minEl_2);
                                         textBox3.Text = "";
+                                        label1.Text = "от 582,5 до 682,0";
+                                        label2.Text = "от 682,0 до 688,0";
+                                        label3.Text = "";
                                     }
                                     else
                                     {
                                         if (checkBox1.Checked == true && checkBox2.Checked == true && checkBox3.Checked == true)
                                         {
-                                            
+                                            int massEl = 0;
+
                                             for (int i = 0; i < 13; i++)
                                             {
                                                 GEIzmer_1[i] = GEIzmer[i];
                                             }
-                                            for (int i = 14; i < 26; i++)
+                                            for (int i = 13; i < 26; i++)
                                             {
-                                                GEIzmer_2[i] = GEIzmer[i];
+                                                GEIzmer_2[massEl] = GEIzmer[i];
+                                                massEl++;
                                             }
-                                            for (int i = 27; i < 39; i++)
+                                            massEl = 0;
+                                            for (int i = 26; i < 39; i++)
                                             {
-                                                GEIzmer_3[i] = GEIzmer[i];
+                                                GEIzmer_3[massEl] = GEIzmer[i];
+                                                massEl++;
                                             }
                                             Array.Sort(GEIzmer_1);
                                             double minEl = GEIzmer_1[0];
@@ -740,6 +762,9 @@ namespace Ecoview_Home_Version
                                             Array.Sort(GEIzmer_3);
                                             double minEl_3 = GEIzmer_3[0];
                                             textBox3.Text = string.Format("{0:0.00}", minEl_3); ;
+                                            label1.Text = "от 428,0 до 582,5";
+                                            label2.Text = "от 582,5 до 682,0";
+                                            label3.Text = "от 682,0 до 688,0";
                                         }
                                     }
                                 }
@@ -806,41 +831,31 @@ namespace Ecoview_Home_Version
                     double SWText1_double = Convert.ToDouble(SWText1);
                     double GWNew_double = double.Parse(GWNew.Text.Replace(".", ","));
                     newPort.Write("SW " + SWText1 + "\r");
-                    if ((GWNew_double - SWText1_double) < 70 || (SWText1_double == GWNew_double))
-                    {
-                        Thread.Sleep(1000);
-                    }
-                    else
-                    {
-                        if ((GWNew_double - SWText1_double) > 200 && (GWNew_double - SWText1_double) < 500)
-                        {
-                            Thread.Sleep(1000);
-                        }
-                        else
-                        {
-                            if ((GWNew_double - SWText1_double) > 500)
-                            {
-                                Thread.Sleep(37000);
-                            }
-                            else
-                            {
-                                Thread.Sleep(1000);
-                            }
-                        }
-                    }
-                    // string GW_string = "";
+  
                     int byteRecieved1 = newPort.ReadBufferSize;
                     Thread.Sleep(1500);
                     byte[] buffer1 = new byte[byteRecieved1];
-                    newPort.ReadLine();
-                    if (newPort.ReadLine() != "OK")
+                   
+                    string indata = newPort.ReadExisting();
+                   
+                    bool indata_bool = true;
+                    while (indata_bool == true)
                     {
-                        newPort.Read(buffer1, 0, byteRecieved1);
+                        if (indata.Contains('>'))
+                        {
+                         
+                            indata_bool = false;
+                     
+                        }
+               
+                        else {
+                            indata = newPort.ReadExisting();
+                        }
                     }
-                    else
-                    {
-                        GWNew.Text = SWText1;
-                    }
+                                  
+
+                            GWNew.Text = SWText1;
+               
                     SWF.Application.OpenForms["LogoFrm"].Close();
                     SAGE(ref countSA, ref GE5_1_0);
                    
@@ -867,41 +882,31 @@ namespace Ecoview_Home_Version
                     GWNew_double = double.Parse(GWNew.Text.Replace(".", ","));
                     newPort.Write("SW " + SWText1 + "\r");
                     //  double raznica = SWText1_double - GWNew_double;
-                    if ((GWNew_double - SWText1_double) < 70 || (SWText1_double == GWNew_double))
-                    {
-                        Thread.Sleep(1000);
-                    }
-                    else
-                    {
-                        if ((GWNew_double - SWText1_double) > 200 && (GWNew_double - SWText1_double) < 500)
-                        {
-                            Thread.Sleep(1000);
-                        }
-                        else
-                        {
-                            if ((GWNew_double - SWText1_double) > 500)
-                            {
-                                Thread.Sleep(37000);
-                            }
-                            else
-                            {
-                                Thread.Sleep(1000);
-                            }
-                        }
-                    }
+                  
                     // string GW_string = "";
                     int byteRecieved1 = newPort.ReadBufferSize;
                     Thread.Sleep(1500);
                     byte[] buffer1 = new byte[byteRecieved1];
-                    newPort.ReadLine();
-                    if (newPort.ReadLine() != "OK")
+                    string indata = newPort.ReadExisting();
+
+                    bool indata_bool = true;
+                    while (indata_bool == true)
                     {
-                        newPort.Read(buffer1, 0, byteRecieved1);
+                        if (indata.Contains('>'))
+                        {
+
+                            indata_bool = false;
+
+                        }
+
+                        else {
+                            indata = newPort.ReadExisting();
+                        }
                     }
-                    else
-                    {
-                        GWNew.Text = SWText1;
-                    }
+
+
+                    GWNew.Text = SWText1;
+
                     SWF.Application.OpenForms["LogoFrm"].Close();
                     SAGE(ref countSA, ref GE5_1_0);
                     SA1[j] = Convert.ToInt32(countSA);
@@ -924,41 +929,31 @@ namespace Ecoview_Home_Version
                 double SWText1_double = Convert.ToDouble(SWText1);
                 double GWNew_double = double.Parse(GWNew.Text.Replace(".", ","));
                 newPort.Write("SW " + SWText1 + "\r");
-                if ((GWNew_double - SWText1_double) < 70 || (SWText1_double == GWNew_double))
-                {
-                    Thread.Sleep(1000);
-                }
-                else
-                {
-                    if ((GWNew_double - SWText1_double) > 200 && (GWNew_double - SWText1_double) < 500)
-                    {
-                        Thread.Sleep(1000);
-                    }
-                    else
-                    {
-                        if ((GWNew_double - SWText1_double) > 500)
-                        {
-                            Thread.Sleep(37000);
-                        }
-                        else
-                        {
-                            Thread.Sleep(1000);
-                        }
-                    }
-                }
+      
                 // string GW_string = "";
                 int byteRecieved1 = newPort.ReadBufferSize;
                 Thread.Sleep(1500);
                 byte[] buffer1 = new byte[byteRecieved1];
-                newPort.ReadLine();
-                if (newPort.ReadLine() != "OK")
+                string indata = newPort.ReadExisting();
+
+                bool indata_bool = true;
+                while (indata_bool == true)
                 {
-                    newPort.Read(buffer1, 0, byteRecieved1);
+                    if (indata.Contains('>'))
+                    {
+
+                        indata_bool = false;
+
+                    }
+
+                    else {
+                        indata = newPort.ReadExisting();
+                    }
                 }
-                else
-                {
-                    GWNew.Text = SWText1;
-                }
+
+
+                GWNew.Text = SWText1;
+
                 SWF.Application.OpenForms["LogoFrm"].Close();
                 SAGE(ref countSA, ref GE5_1_0);
 
@@ -984,41 +979,31 @@ namespace Ecoview_Home_Version
                     double SWText1_double = Convert.ToDouble(SWText1);
                     double GWNew_double = double.Parse(GWNew.Text.Replace(".", ","));
                     newPort.Write("SW " + SWText1 + "\r");
-                    if ((GWNew_double - SWText1_double) < 70 || (SWText1_double == GWNew_double))
-                    {
-                        Thread.Sleep(1000);
-                    }
-                    else
-                    {
-                        if ((GWNew_double - SWText1_double) > 200 && (GWNew_double - SWText1_double) < 500)
-                        {
-                            Thread.Sleep(1000);
-                        }
-                        else
-                        {
-                            if ((GWNew_double - SWText1_double) > 500)
-                            {
-                                Thread.Sleep(37000);
-                            }
-                            else
-                            {
-                                Thread.Sleep(1000);
-                            }
-                        }
-                    }
+
                     // string GW_string = "";
                     int byteRecieved1 = newPort.ReadBufferSize;
                     Thread.Sleep(1500);
                     byte[] buffer1 = new byte[byteRecieved1];
-                    newPort.ReadLine();
-                    if (newPort.ReadLine() != "OK")
+                    string indata = newPort.ReadExisting();
+
+                    bool indata_bool = true;
+                    while (indata_bool == true)
                     {
-                        newPort.Read(buffer1, 0, byteRecieved1);
+                        if (indata.Contains('>'))
+                        {
+
+                            indata_bool = false;
+
+                        }
+
+                        else {
+                            indata = newPort.ReadExisting();
+                        }
                     }
-                    else
-                    {
-                        GWNew.Text = SWText1;
-                    }
+
+
+                    GWNew.Text = SWText1;
+
                     SWF.Application.OpenForms["LogoFrm"].Close();
                     newPort.Write("SA " + SA[i] + "\r");
                     int SAAnalisByteRecieved1 = newPort.ReadBufferSize;
@@ -1063,44 +1048,33 @@ namespace Ecoview_Home_Version
                     double raznica = SWText1_double - GWNew_double;
                     newPort.Write("SW " + SWText1 + "\r");
 
-                    if ((GWNew_double - SWText1_double) < 70 || (SWText1_double == GWNew_double))
-                    {
-                        Thread.Sleep(1000);
-                    }
-                    else
-                    {
-                        if ((GWNew_double - SWText1_double) > 200 && (GWNew_double - SWText1_double) < 500)
-                        {
-                            Thread.Sleep(1000);
-                        }
-                        else
-                        {
-                            if ((GWNew_double - SWText1_double) > 500)
-                            {
-                                Thread.Sleep(37000);
-                            }
-                            else
-                            {
-                                Thread.Sleep(1000);
-                            }
-                        }
-                    }
+                  
                     // string GW_string = "";
                     int byteRecieved1 = newPort.ReadBufferSize;
                     
                         Thread.Sleep(1500);
                     
                     byte[] buffer1 = new byte[byteRecieved1];
-                    newPort.ReadLine();
-                    if (newPort.ReadLine() != "OK")
+                    string indata = newPort.ReadExisting();
+
+                    bool indata_bool = true;
+                    while (indata_bool == true)
                     {
-                        Thread.Sleep(1500);
-                        newPort.Read(buffer1, 0, byteRecieved1);
+                        if (indata.Contains('>'))
+                        {
+
+                            indata_bool = false;
+
+                        }
+
+                        else {
+                            indata = newPort.ReadExisting();
+                        }
                     }
-                    else
-                    {
-                        GWNew.Text = SWText1;
-                    }
+
+
+                    GWNew.Text = SWText1;
+
                     SWF.Application.OpenForms["LogoFrm"].Close();
                     newPort.Write("SA " + SA1[j] + "\r");
                     int SAAnalisByteRecieved1 = newPort.ReadBufferSize;
@@ -1148,42 +1122,32 @@ namespace Ecoview_Home_Version
                     double SWText1_double = Convert.ToDouble(SWText1);
                     double GWNew_double = double.Parse(GWNew.Text.Replace(".", ","));
                     newPort.Write("SW " + SWText1 + "\r");
-                    if ((GWNew_double - SWText1_double) < 70 || (SWText1_double == GWNew_double))
-                    {
-                        Thread.Sleep(1000);
-                    }
-                    else
-                    {
-                        if ((GWNew_double - SWText1_double) > 200 && (GWNew_double - SWText1_double) < 500)
-                        {
-                            Thread.Sleep(1000);
-                        }
-                        else
-                        {
-                            if ((GWNew_double - SWText1_double) > 500)
-                            {
-                                Thread.Sleep(37000);
-                            }
-                            else
-                            {
-                                Thread.Sleep(1000);
-                            }
-                        }
-                    }
+                   
                     // string GW_string = "";
                     int byteRecieved1 = newPort.ReadBufferSize;
                     Thread.Sleep(1500);
                     byte[] buffer1 = new byte[byteRecieved1];
-                    newPort.ReadLine();
-                    if (newPort.ReadLine() != "OK")
+                string indata = newPort.ReadExisting();
+
+                bool indata_bool = true;
+                while (indata_bool == true)
+                {
+                    if (indata.Contains('>'))
                     {
-                        newPort.Read(buffer1, 0, byteRecieved1);
+
+                        indata_bool = false;
+
                     }
-                    else
-                    {
-                        GWNew.Text = SWText1;
+
+                    else {
+                        indata = newPort.ReadExisting();
                     }
-                    SWF.Application.OpenForms["LogoFrm"].Close();
+                }
+
+
+                GWNew.Text = SWText1;
+
+                SWF.Application.OpenForms["LogoFrm"].Close();
                     newPort.Write("SA " + SA[i] + "\r");
                     int SAAnalisByteRecieved1 = newPort.ReadBufferSize;
                     Thread.Sleep(100);

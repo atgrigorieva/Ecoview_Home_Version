@@ -179,6 +179,7 @@ namespace Ecoview_Home_Version
             newPort.Write("CO\r");
 
         }
+        public string versionPribor;
         public void CO()
         {
 
@@ -200,6 +201,8 @@ namespace Ecoview_Home_Version
 
             GW1_2 = GWarr[2];
             GWNew.Text = GW1_2;
+            versionPribor = GWarr[1];
+            MessageBox.Show(versionPribor);
            //// Regex regex = new Regex(pattern);
            // string GW1_2_string = regex
         }
@@ -249,8 +252,9 @@ namespace Ecoview_Home_Version
             newPort.Read(SAAnalisBuffer1, 0, SAAnalisByteRecieved1);
 
             newPort.Write("GE 1\r");
+
             int GEbyteRecieved4_1 = newPort.ReadBufferSize;
-            Thread.Sleep(100);
+            Thread.Sleep(3500);
             byte[] GEbuffer4_1 = new byte[GEbyteRecieved4_1];
             newPort.Read(GEbuffer4_1, 0, GEbyteRecieved4_1);
             string GE5_1 = "";
@@ -283,7 +287,7 @@ namespace Ecoview_Home_Version
 
                 newPort.Write("GE 1\r");
                 int GEbyteRecieved4_1_1_1 = newPort.ReadBufferSize;
-                Thread.Sleep(100);
+                Thread.Sleep(3500);
                 byte[] GEbuffer4_1_1_1 = new byte[GEbyteRecieved4_1_1_1];
                 newPort.Read(GEbuffer4_1_1_1, 0, GEbyteRecieved4_1_1_1);
                 for (int i_1 = 0; i_1 <= 50; i_1++)
@@ -607,7 +611,7 @@ namespace Ecoview_Home_Version
                 countIzmer++;
                 Table1.Rows.Add();
                 Table1.CurrentCell = Table1.Rows[countIzmer].Cells[0];
-
+               // MessageBox.Show("Находим минимумы");
                 if (checkBox1.Checked == true && checkBox2.Checked == false && checkBox3.Checked == false)
                 {
                     for (int i = 0; i < 13; i++)
@@ -619,6 +623,30 @@ namespace Ecoview_Home_Version
                     textBox1.Text = string.Format("{0:0.00}", minEl);
                     textBox2.Text = "";
                     textBox3.Text = "";
+                    label1.Text = "от 428,0 до 582,5";
+                    label2.Text = "";
+                    label3.Text = "";
+                    bool minEl_bool = true;
+                    int minEl_zero = 0;
+                    int selRowNum = Table1.CurrentCell.RowIndex;
+                    while (minEl_bool == true)
+                    {
+                      //  double minEl1 = Convert.ToDouble(Table1.Rows[selRowNum-1].Cells[minEl_zero].Value);
+                      //  double minel2 = Convert.ToDouble(Table1.Rows[selRowNum-1].Cells[minEl_zero+1].Value);
+                        if (Convert.ToDouble(Table1.Rows[selRowNum - 1].Cells[minEl_zero].Value) == Convert.ToDouble(string.Format("{0:0.00}", minEl)))
+                        {
+                            label4.Text = Table1.Columns[minEl_zero].HeaderText;
+                            label5.Text = "";
+                            label6.Text = "";
+                            minEl_bool = false;
+                        }
+                        else
+                        {
+                           // MessageBox.Show(Table1.Rows[selRowNum-1].Cells[minEl_zero].Value.ToString());
+                            minEl_zero++;
+
+                        }
+                    } 
                 }
                 else
                 {
@@ -633,9 +661,27 @@ namespace Ecoview_Home_Version
                         textBox1.Text = string.Format("{0:0.00}", minEl);
                         textBox2.Text = "";
                         textBox3.Text = "";
-                        label1.Text = "от 428,0 до 582,5";
+                        label1.Text = "от 582,5 до 682,0";
                         label2.Text = "";
                         label3.Text = "";
+                        bool minEl_bool = true;
+                        int minEl_zero = 0;
+                        int selRowNum = Table1.CurrentCell.RowIndex;
+                        while (minEl_bool == true)
+                        {
+                            if (string.Format("{0:0.00}", (Table1.Rows[selRowNum-1].Cells[minEl_zero].Value)) == string.Format("{0:0.00}", minEl))
+                            {
+                                label4.Text = Table1.Columns[minEl_zero].HeaderText;
+                                label5.Text = "";
+                                label6.Text = "";
+                                minEl_bool = false;
+                            }
+                            else
+                            {
+                                minEl_zero++;
+
+                            }
+                        }
 
                     }
                     else
@@ -651,9 +697,27 @@ namespace Ecoview_Home_Version
                             textBox1.Text = string.Format("{0:0.00}", minEl);
                             textBox2.Text = "";
                             textBox3.Text = "";
-                            label1.Text = "от 428,0 до 582,5";
+                            label1.Text = "от 682,0 до 688,0";
                             label2.Text = "";
                             label3.Text = "";
+                            bool minEl_bool = true;
+                            int minEl_zero = 0;
+                            int selRowNum = Table1.CurrentCell.RowIndex;
+                            while (minEl_bool == true)
+                            {
+                                if (string.Format("{0:0.00}", (Table1.Rows[selRowNum-1].Cells[minEl_zero].Value)) == string.Format("{0:0.00}", minEl))
+                                {
+                                    label4.Text = Table1.Columns[minEl_zero].HeaderText;
+                                    label5.Text = "";
+                                    label6.Text = "";
+                                    minEl_bool = false;
+                                }
+                                else
+                                {
+                                    minEl_zero++;
+
+                                }
+                            }
                         }
                         else
                         {
@@ -673,9 +737,44 @@ namespace Ecoview_Home_Version
                                 Array.Sort(GEIzmer_1);
                                 double minEl = GEIzmer_1[0];
                                 textBox1.Text = string.Format("{0:0.00}", minEl);
+                                bool minEl_bool = true;
+                                int minEl_zero = 0;
+                                int selRowNum = Table1.CurrentCell.RowIndex;
+                                while (minEl_bool == true)
+                                {
+                                    if (string.Format("{0:0.00}", (Table1.Rows[selRowNum-1].Cells[minEl_zero].Value)) == string.Format("{0:0.00}", textBox1.Text))
+                                    {
+                                        label4.Text = Table1.Columns[minEl_zero].HeaderText;
+                                        label5.Text = "";
+                                        label6.Text = "";
+                                        minEl_bool = false;
+                                    }
+                                    else
+                                    {
+                                        minEl_zero++;
+
+                                    }
+                                }
                                 Array.Sort(GEIzmer_2);
                                 double minEl_2 = GEIzmer_2[0];
                                 textBox2.Text = string.Format("{0:0.00}", minEl_2);
+                                minEl_bool = true;
+                                minEl_zero = 0;
+                                selRowNum = Table1.CurrentCell.RowIndex;
+                                while (minEl_bool == true)
+                                {
+                                    if (string.Format("{0:0.00}", (Table1.Rows[selRowNum-1].Cells[minEl_zero].Value)) == string.Format("{0:0.00}", textBox2.Text))
+                                    {
+                                        label5.Text = Table1.Columns[minEl_zero].HeaderText;
+                                        
+                                        minEl_bool = false;
+                                    }
+                                    else
+                                    {
+                                        minEl_zero++;
+
+                                    }
+                                }
                                 textBox3.Text = "";
                                 label1.Text = "от 428,0 до 582,5";
                                 label2.Text = "от 582,5 до 682,0";
@@ -698,9 +797,44 @@ namespace Ecoview_Home_Version
                                     Array.Sort(GEIzmer_1);
                                     double minEl = GEIzmer_1[0];
                                     textBox1.Text = string.Format("{0:0.00}", minEl);
+                                    bool minEl_bool = true;
+                                    int minEl_zero = 0;
+                                    int selRowNum = Table1.CurrentCell.RowIndex;
+                                    while (minEl_bool == true)
+                                    {
+                                        if (string.Format("{0:0.00}", (Table1.Rows[selRowNum-1].Cells[minEl_zero].Value)) == string.Format("{0:0.00}", textBox1.Text))
+                                        {
+                                            label4.Text = Table1.Columns[minEl_zero].HeaderText;
+                                            label5.Text = "";
+                                            label6.Text = "";
+                                            minEl_bool = false;
+                                        }
+                                        else
+                                        {
+                                            minEl_zero++;
+
+                                        }
+                                    }
                                     Array.Sort(GEIzmer_2);
                                     double minEl_2 = GEIzmer_2[0];
                                     textBox2.Text = string.Format("{0:0.00}", minEl_2);
+                                    minEl_bool = true;
+                                    minEl_zero = 0;
+                                    selRowNum = Table1.CurrentCell.RowIndex;
+                                    while (minEl_bool == true)
+                                    {
+                                        if (string.Format("{0:0.00}", (Table1.Rows[selRowNum-1].Cells[minEl_zero].Value)) == string.Format("{0:0.00}", textBox2.Text))
+                                        {
+                                            label5.Text = Table1.Columns[minEl_zero].HeaderText;
+                                            
+                                            minEl_bool = false;
+                                        }
+                                        else
+                                        {
+                                            minEl_zero++;
+
+                                        }
+                                    }
                                     textBox3.Text = "";
                                     label1.Text = "от 428,0 до 582,5";
                                     label2.Text = "от 682,0 до 688,0";
@@ -724,9 +858,44 @@ namespace Ecoview_Home_Version
                                         Array.Sort(GEIzmer_1);
                                         double minEl = GEIzmer_1[0];
                                         textBox1.Text = string.Format("{0:0.00}", minEl);
+                                        bool minEl_bool = true;
+                                        int minEl_zero = 0;
+                                        int selRowNum = Table1.CurrentCell.RowIndex;
+                                        while (minEl_bool == true)
+                                        {
+                                            if (string.Format("{0:0.00}", (Table1.Rows[selRowNum-1].Cells[minEl_zero].Value)) == string.Format("{0:0.00}", textBox1.Text))
+                                            {
+                                                label4.Text = Table1.Columns[minEl_zero].HeaderText;
+                                                label5.Text = "";
+                                                label6.Text = "";
+                                                minEl_bool = false;
+                                            }
+                                            else
+                                            {
+                                                minEl_zero++;
+
+                                            }
+                                        }
                                         Array.Sort(GEIzmer_2);
                                         double minEl_2 = GEIzmer_2[0];
                                         textBox2.Text = string.Format("{0:0.00}", minEl_2);
+                                        minEl_bool = true;
+                                        minEl_zero = 0;
+                                        selRowNum = Table1.CurrentCell.RowIndex;
+                                        while (minEl_bool == true)
+                                        {
+                                            if (string.Format("{0:0.00}", (Table1.Rows[selRowNum-1].Cells[minEl_zero].Value)) == string.Format("{0:0.00}", textBox2.Text))
+                                            {
+                                                label5.Text = Table1.Columns[minEl_zero].HeaderText;
+                                               
+                                                minEl_bool = false;
+                                            }
+                                            else
+                                            {
+                                                minEl_zero++;
+
+                                            }
+                                        }
                                         textBox3.Text = "";
                                         label1.Text = "от 582,5 до 682,0";
                                         label2.Text = "от 682,0 до 688,0";
@@ -756,12 +925,64 @@ namespace Ecoview_Home_Version
                                             Array.Sort(GEIzmer_1);
                                             double minEl = GEIzmer_1[0];
                                             textBox1.Text = string.Format("{0:0.00}", minEl);
+                                            bool minEl_bool = true;
+                                            int minEl_zero = 0;
+                                            int selRowNum = Table1.CurrentCell.RowIndex;
+                                            while (minEl_bool == true)
+                                            {
+                                                if (string.Format("{0:0.00}", (Table1.Rows[selRowNum-1].Cells[minEl_zero].Value)) == string.Format("{0:0.00}", textBox1.Text))
+                                                {
+                                                    label4.Text = Table1.Columns[minEl_zero].HeaderText;
+                                                    label5.Text = "";
+                                                    label6.Text = "";
+                                                    minEl_bool = false;
+                                                }
+                                                else
+                                                {
+                                                    minEl_zero++;
+
+                                                }
+                                            }
                                             Array.Sort(GEIzmer_2);
                                             double minEl_2 = GEIzmer_2[0];
                                             textBox2.Text = string.Format("{0:0.00}", minEl_2);
+                                            minEl_bool = true;
+                                            minEl_zero = 0;
+                                            selRowNum = Table1.CurrentCell.RowIndex;
+                                            while (minEl_bool == true)
+                                            {
+                                                if (string.Format("{0:0.00}", (Table1.Rows[selRowNum-1].Cells[minEl_zero].Value)) == string.Format("{0:0.00}", textBox2.Text))
+                                                {
+                                                    label5.Text = Table1.Columns[minEl_zero].HeaderText;
+                                                   
+                                                    minEl_bool = false;
+                                                }
+                                                else
+                                                {
+                                                    minEl_zero++;
+
+                                                }
+                                            }
                                             Array.Sort(GEIzmer_3);
                                             double minEl_3 = GEIzmer_3[0];
-                                            textBox3.Text = string.Format("{0:0.00}", minEl_3); ;
+                                            textBox3.Text = string.Format("{0:0.00}", minEl_3);
+                                            minEl_bool = true;
+                                            minEl_zero = 0;
+                                            selRowNum = Table1.CurrentCell.RowIndex;
+                                            while (minEl_bool == true)
+                                            {
+                                                if (string.Format("{0:0.00}", (Table1.Rows[selRowNum-1].Cells[minEl_zero].Value)) == string.Format("{0:0.00}", textBox3.Text))
+                                                {
+                                                    label6.Text = Table1.Columns[minEl_zero].HeaderText;
+                                                   
+                                                    minEl_bool = false;
+                                                }
+                                                else
+                                                {
+                                                    minEl_zero++;
+
+                                                }
+                                            }
                                             label1.Text = "от 428,0 до 582,5";
                                             label2.Text = "от 582,5 до 682,0";
                                             label3.Text = "от 682,0 до 688,0";
@@ -826,15 +1047,15 @@ namespace Ecoview_Home_Version
                 {
                     // GW();
                     Table1.CurrentCell = Table1.Rows[countIzmer].Cells[j];
-                    LogoForm1();
+                   // LogoForm1();
                     string SWText1 = Table1.Columns[j].HeaderText;
                     double SWText1_double = Convert.ToDouble(SWText1);
                     double GWNew_double = double.Parse(GWNew.Text.Replace(".", ","));
                     newPort.Write("SW " + SWText1 + "\r");
   
-                    int byteRecieved1 = newPort.ReadBufferSize;
-                    Thread.Sleep(1500);
-                    byte[] buffer1 = new byte[byteRecieved1];
+                   // int byteRecieved1 = newPort.ReadBufferSize;
+                    Thread.Sleep(500);
+                 //   byte[] buffer1 = new byte[byteRecieved1];
                    
                     string indata = newPort.ReadExisting();
                    
@@ -856,63 +1077,112 @@ namespace Ecoview_Home_Version
 
                             GWNew.Text = SWText1;
                
-                    SWF.Application.OpenForms["LogoFrm"].Close();
+                 //   SWF.Application.OpenForms["LogoFrm"].Close();
                     SAGE(ref countSA, ref GE5_1_0);
                    
                     SA[i] = Convert.ToInt32(countSA);
                     GE[i] = Convert.ToInt32(GE5_1_0);
                  //   double Aser = Convert.ToDouble(GE5Izmer) / Convert.ToDouble(GE[j]) * 100;
-                    Table1.CurrentCell.Value = string.Format("{0:0.0}", GE[i]);
+               //     Table1.CurrentCell.Value = string.Format("{0:0.0}", GE[i]);
                     i++;
                 }
            //     IzmerGE();
             }
             else
             {
+                int massEl = 0;
                 SA1 = new int[5];
                 GE1 = new int[5];
-                for (int j = 0; j <= 4; j++)
+                if (versionPribor.Contains('U'))
                 {
-                    Table2.CurrentCell = Table2.Rows[countIzmer1].Cells[j];
-                    double GWNew_double = 0.0;
-               //     GW();
-                    LogoForm1();
-                    string SWText1 = Table2.Columns[j].HeaderText;
-                    double SWText1_double = Convert.ToDouble(SWText1);
-                    GWNew_double = double.Parse(GWNew.Text.Replace(".", ","));
-                    newPort.Write("SW " + SWText1 + "\r");
-                    //  double raznica = SWText1_double - GWNew_double;
-                  
-                    // string GW_string = "";
-                    int byteRecieved1 = newPort.ReadBufferSize;
-                    Thread.Sleep(1500);
-                    byte[] buffer1 = new byte[byteRecieved1];
-                    string indata = newPort.ReadExisting();
-
-                    bool indata_bool = true;
-                    while (indata_bool == true)
+                    for (int j = 0; j <= 4; j++)
                     {
-                        if (indata.Contains('>'))
+                        Table2.CurrentCell = Table2.Rows[countIzmer1].Cells[j];
+                        double GWNew_double = 0.0;
+                        //     GW();
+                  //      LogoForm1();
+                        string SWText1 = Table2.Columns[j].HeaderText;
+                        double SWText1_double = Convert.ToDouble(SWText1);
+                        GWNew_double = double.Parse(GWNew.Text.Replace(".", ","));
+                        newPort.Write("SW " + SWText1 + "\r");
+                        //  double raznica = SWText1_double - GWNew_double;
+
+                        // string GW_string = "";
+                       // int byteRecieved1 = newPort.ReadBufferSize;
+                        Thread.Sleep(500);
+                       // byte[] buffer1 = new byte[byteRecieved1];
+                       string indata = newPort.ReadExisting();
+
+                        bool indata_bool = true;
+                        while (indata_bool == true)
                         {
+                            if (indata.Contains('>'))
+                            {
 
-                            indata_bool = false;
+                                indata_bool = false;
 
+                            }
+
+                            else {
+                                indata = newPort.ReadExisting();
+                            }
                         }
 
-                        else {
-                            indata = newPort.ReadExisting();
-                        }
+
+                        GWNew.Text = SWText1;
+
+                   //     SWF.Application.OpenForms["LogoFrm"].Close();
+                        SAGE(ref countSA, ref GE5_1_0);
+                        SA1[j] = Convert.ToInt32(countSA);
+                        GE1[j] = Convert.ToInt32(GE5_1_0);
                     }
-
-
-                    GWNew.Text = SWText1;
-
-                    SWF.Application.OpenForms["LogoFrm"].Close();
-                    SAGE(ref countSA, ref GE5_1_0);
-                    SA1[j] = Convert.ToInt32(countSA);
-                    GE1[j] = Convert.ToInt32(GE5_1_0);
-                  //  Table2.CurrentCell.Value = string.Format("{0:0.0}", GE1[j]);
                 }
+                else {
+                    for (int j = 2; j <= 4; j++)
+                    {
+                        Table2.CurrentCell = Table2.Rows[countIzmer1].Cells[j];
+                        double GWNew_double = 0.0;
+                        //     GW();
+               //         LogoForm1();
+                        string SWText1 = Table2.Columns[j].HeaderText;
+                        double SWText1_double = Convert.ToDouble(SWText1);
+                        GWNew_double = double.Parse(GWNew.Text.Replace(".", ","));
+                        newPort.Write("SW " + SWText1 + "\r");
+                        //  double raznica = SWText1_double - GWNew_double;
+
+                        // string GW_string = "";
+                      //  int byteRecieved1 = newPort.ReadBufferSize;
+                        Thread.Sleep(500);
+                       // byte[] buffer1 = new byte[byteRecieved1];
+                        string indata = newPort.ReadExisting();
+
+                        bool indata_bool = true;
+                        while (indata_bool == true)
+                        {
+                            if (indata.Contains('>'))
+                            {
+
+                                indata_bool = false;
+
+                            }
+
+                            else {
+                                indata = newPort.ReadExisting();
+                            }
+                        }
+
+
+                        GWNew.Text = SWText1;
+
+               //         SWF.Application.OpenForms["LogoFrm"].Close();
+                        SAGE(ref countSA, ref GE5_1_0);
+                        SA1[massEl] = Convert.ToInt32(countSA);
+                        GE1[massEl] = Convert.ToInt32(GE5_1_0);
+                        massEl++;
+                    }
+                }
+                  //  Table2.CurrentCell.Value = string.Format("{0:0.0}", GE1[j]);
+                
                // Thread.Sleep(10000);
       //          IzmerGE();
             }
@@ -924,16 +1194,16 @@ namespace Ecoview_Home_Version
             {
                 // GW();
                 Table1.CurrentCell = Table1.Rows[countIzmer].Cells[j];
-                LogoForm1();
+          //      LogoForm1();
                 string SWText1 = Table1.Columns[j].HeaderText;
                 double SWText1_double = Convert.ToDouble(SWText1);
                 double GWNew_double = double.Parse(GWNew.Text.Replace(".", ","));
                 newPort.Write("SW " + SWText1 + "\r");
       
                 // string GW_string = "";
-                int byteRecieved1 = newPort.ReadBufferSize;
-                Thread.Sleep(1500);
-                byte[] buffer1 = new byte[byteRecieved1];
+               // int byteRecieved1 = newPort.ReadBufferSize;
+                Thread.Sleep(500);
+              //  byte[] buffer1 = new byte[byteRecieved1];
                 string indata = newPort.ReadExisting();
 
                 bool indata_bool = true;
@@ -954,13 +1224,13 @@ namespace Ecoview_Home_Version
 
                 GWNew.Text = SWText1;
 
-                SWF.Application.OpenForms["LogoFrm"].Close();
+         //       SWF.Application.OpenForms["LogoFrm"].Close();
                 SAGE(ref countSA, ref GE5_1_0);
 
                 SA[i] = Convert.ToInt32(countSA);
                 GE[i] = Convert.ToInt32(GE5_1_0);
                 //   double Aser = Convert.ToDouble(GE5Izmer) / Convert.ToDouble(GE[j]) * 100;
-                Table1.CurrentCell.Value = string.Format("{0:0.0}", GE[i]);
+               // Table1.CurrentCell.Value = string.Format("{0:0.0}", GE[i]);
                 i++;
             }
         }
@@ -974,16 +1244,16 @@ namespace Ecoview_Home_Version
                 {
                     //    GW();
                     Table1.CurrentCell = Table1.Rows[countIzmer].Cells[j];
-                    LogoForm1();
+                 //   LogoForm1();
                     string SWText1 = Table1.Columns[j].HeaderText;
                     double SWText1_double = Convert.ToDouble(SWText1);
                     double GWNew_double = double.Parse(GWNew.Text.Replace(".", ","));
                     newPort.Write("SW " + SWText1 + "\r");
 
                     // string GW_string = "";
-                    int byteRecieved1 = newPort.ReadBufferSize;
-                    Thread.Sleep(1500);
-                    byte[] buffer1 = new byte[byteRecieved1];
+                   // int byteRecieved1 = newPort.ReadBufferSize;
+                    Thread.Sleep(500);
+                  //  byte[] buffer1 = new byte[byteRecieved1];
                     string indata = newPort.ReadExisting();
 
                     bool indata_bool = true;
@@ -1004,7 +1274,7 @@ namespace Ecoview_Home_Version
 
                     GWNew.Text = SWText1;
 
-                    SWF.Application.OpenForms["LogoFrm"].Close();
+                  //  SWF.Application.OpenForms["LogoFrm"].Close();
                     newPort.Write("SA " + SA[i] + "\r");
                     int SAAnalisByteRecieved1 = newPort.ReadBufferSize;
                     Thread.Sleep(100);
@@ -1036,72 +1306,145 @@ namespace Ecoview_Home_Version
             }
             else
             {
+                int massEl = 0;
                 GWNew.Text = Table2.Columns[4].HeaderText;
-                for (int j = 0; j <= 4; j++)
+                if (versionPribor.Contains('U'))
                 {
-                    // GW();
-                    Table2.CurrentCell = Table2.Rows[countIzmer1].Cells[j];
-                    LogoForm1();
-                    string SWText1 = Table2.Columns[j].HeaderText;
-                    double SWText1_double = Convert.ToDouble(SWText1);
-                    double GWNew_double = double.Parse(GWNew.Text.Replace(".", ","));
-                    double raznica = SWText1_double - GWNew_double;
-                    newPort.Write("SW " + SWText1 + "\r");
-
-                  
-                    // string GW_string = "";
-                    int byteRecieved1 = newPort.ReadBufferSize;
-                    
-                        Thread.Sleep(1500);
-                    
-                    byte[] buffer1 = new byte[byteRecieved1];
-                    string indata = newPort.ReadExisting();
-
-                    bool indata_bool = true;
-                    while (indata_bool == true)
+                    for (int j = 0; j <= 4; j++)
                     {
-                        if (indata.Contains('>'))
+                        // GW();
+                        Table2.CurrentCell = Table2.Rows[countIzmer1].Cells[j];
+                   //     LogoForm1();
+                        string SWText1 = Table2.Columns[j].HeaderText;
+                        double SWText1_double = Convert.ToDouble(SWText1);
+                        double GWNew_double = double.Parse(GWNew.Text.Replace(".", ","));
+                        double raznica = SWText1_double - GWNew_double;
+                        newPort.Write("SW " + SWText1 + "\r");
+
+
+                        // string GW_string = "";
+                       // int byteRecieved1 = newPort.ReadBufferSize;
+
+                        Thread.Sleep(500);
+
+                       // byte[] buffer1 = new byte[byteRecieved1];
+                        string indata = newPort.ReadExisting();
+
+                        bool indata_bool = true;
+                        while (indata_bool == true)
                         {
+                            if (indata.Contains('>'))
+                            {
 
-                            indata_bool = false;
+                                indata_bool = false;
 
+                            }
+
+                            else {
+                                indata = newPort.ReadExisting();
+                            }
                         }
 
-                        else {
-                            indata = newPort.ReadExisting();
+
+                        GWNew.Text = SWText1;
+
+                    //    SWF.Application.OpenForms["LogoFrm"].Close();
+                        newPort.Write("SA " + SA1[j] + "\r");
+                        int SAAnalisByteRecieved1 = newPort.ReadBufferSize;
+                        Thread.Sleep(100);
+                        byte[] SAAnalisBuffer1 = new byte[SAAnalisByteRecieved1];
+                        newPort.Read(SAAnalisBuffer1, 0, SAAnalisByteRecieved1);
+                        newPort.Write("GE 1\r");
+                        int GEbyteRecieved4_1 = newPort.ReadBufferSize;
+                        Thread.Sleep(1500);
+                        byte[] GEbuffer4_1 = new byte[GEbyteRecieved4_1];
+                        newPort.Read(GEbuffer4_1, 0, GEbyteRecieved4_1);
+                        GE5_1_1 = "";
+                        for (int i_1 = 0; i_1 <= 50; i_1++)
+                        {
+                            GE5_1_1 = GE5_1_1 + Convert.ToChar(GEbuffer4_1[i_1]);
                         }
+                        var GEarr4_1 = GE5_1_1.Split("\r".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+
+                        string GE5Izmer = GEarr4_1[1];
+
+                        // MessageBox.Show(GE5Izmer);
+                        //string GE1 = GE[j+1].ToString();
+                        //        double GE1_double = double.Parse(GE1.Replace(".", ","));
+                        double Aser = Convert.ToDouble(GE5Izmer) / Convert.ToDouble(GE1[j]) * 100;
+                        Table2.CurrentCell.Value = string.Format("{0:0.00}", Aser);
+                        // j--;
                     }
-
-
-                    GWNew.Text = SWText1;
-
-                    SWF.Application.OpenForms["LogoFrm"].Close();
-                    newPort.Write("SA " + SA1[j] + "\r");
-                    int SAAnalisByteRecieved1 = newPort.ReadBufferSize;
-                    Thread.Sleep(100);
-                    byte[] SAAnalisBuffer1 = new byte[SAAnalisByteRecieved1];
-                    newPort.Read(SAAnalisBuffer1, 0, SAAnalisByteRecieved1);
-                    newPort.Write("GE 1\r");
-                    int GEbyteRecieved4_1 = newPort.ReadBufferSize;
-                    Thread.Sleep(1500);
-                    byte[] GEbuffer4_1 = new byte[GEbyteRecieved4_1];
-                    newPort.Read(GEbuffer4_1, 0, GEbyteRecieved4_1);
-                    GE5_1_1 = "";
-                    for (int i_1 = 0; i_1 <= 50; i_1++)
-                    {
-                        GE5_1_1 = GE5_1_1 + Convert.ToChar(GEbuffer4_1[i_1]);
-                    }
-                    var GEarr4_1 = GE5_1_1.Split("\r".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
-
-                    string GE5Izmer = GEarr4_1[1];
-
-                    // MessageBox.Show(GE5Izmer);
-                    //string GE1 = GE[j+1].ToString();
-            //        double GE1_double = double.Parse(GE1.Replace(".", ","));
-                    double Aser = Convert.ToDouble(GE5Izmer) / Convert.ToDouble(GE1[j]) * 100;
-                    Table2.CurrentCell.Value = string.Format("{0:0.00}", Aser);
-                   // j--;
                 }
+                else
+                {
+                    for (int j = 2; j <= 4; j++)
+                    {
+                        // GW();
+                        Table2.CurrentCell = Table2.Rows[countIzmer1].Cells[j];
+                   //     LogoForm1();
+                        string SWText1 = Table2.Columns[j].HeaderText;
+                        double SWText1_double = Convert.ToDouble(SWText1);
+                        double GWNew_double = double.Parse(GWNew.Text.Replace(".", ","));
+                        double raznica = SWText1_double - GWNew_double;
+                        newPort.Write("SW " + SWText1 + "\r");
+
+
+                        // string GW_string = "";
+                      //  int byteRecieved1 = newPort.ReadBufferSize;
+
+                        Thread.Sleep(500);
+
+                       // byte[] buffer1 = new byte[byteRecieved1];
+                        string indata = newPort.ReadExisting();
+
+                        bool indata_bool = true;
+                        while (indata_bool == true)
+                        {
+                            if (indata.Contains('>'))
+                            {
+
+                                indata_bool = false;
+
+                            }
+
+                            else {
+                                indata = newPort.ReadExisting();
+                            }
+                        }
+
+
+                        GWNew.Text = SWText1;
+
+                  //      SWF.Application.OpenForms["LogoFrm"].Close();
+                        newPort.Write("SA " + SA1[j] + "\r");
+                        int SAAnalisByteRecieved1 = newPort.ReadBufferSize;
+                        Thread.Sleep(100);
+                        byte[] SAAnalisBuffer1 = new byte[SAAnalisByteRecieved1];
+                        newPort.Read(SAAnalisBuffer1, 0, SAAnalisByteRecieved1);
+                        newPort.Write("GE 1\r");
+                        int GEbyteRecieved4_1 = newPort.ReadBufferSize;
+                        Thread.Sleep(3500);
+                        byte[] GEbuffer4_1 = new byte[GEbyteRecieved4_1];
+                        newPort.Read(GEbuffer4_1, 0, GEbyteRecieved4_1);
+                        GE5_1_1 = "";
+                        for (int i_1 = 0; i_1 <= 50; i_1++)
+                        {
+                            GE5_1_1 = GE5_1_1 + Convert.ToChar(GEbuffer4_1[i_1]);
+                        }
+                        var GEarr4_1 = GE5_1_1.Split("\r".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+
+                        string GE5Izmer = GEarr4_1[1];
+
+                        // MessageBox.Show(GE5Izmer);
+                        //string GE1 = GE[j+1].ToString();
+                        //        double GE1_double = double.Parse(GE1.Replace(".", ","));
+                        double Aser = Convert.ToDouble(GE5Izmer) / Convert.ToDouble(GE1[massEl]) * 100;
+                        Table2.CurrentCell.Value = string.Format("{0:0.00}", Aser);
+                        // j--;
+                    }
+                
+            }
                // Table2.Rows.Add();
             }
 
@@ -1117,16 +1460,16 @@ namespace Ecoview_Home_Version
                 {
                     //    GW();
                     Table1.CurrentCell = Table1.Rows[countIzmer].Cells[j];
-                    LogoForm1();
+               //     LogoForm1();
                     string SWText1 = Table1.Columns[j].HeaderText;
                     double SWText1_double = Convert.ToDouble(SWText1);
                     double GWNew_double = double.Parse(GWNew.Text.Replace(".", ","));
                     newPort.Write("SW " + SWText1 + "\r");
                    
                     // string GW_string = "";
-                    int byteRecieved1 = newPort.ReadBufferSize;
-                    Thread.Sleep(1500);
-                    byte[] buffer1 = new byte[byteRecieved1];
+                    //int byteRecieved1 = newPort.ReadBufferSize;
+                    Thread.Sleep(500);
+                   // byte[] buffer1 = new byte[byteRecieved1];
                 string indata = newPort.ReadExisting();
 
                 bool indata_bool = true;
@@ -1147,7 +1490,7 @@ namespace Ecoview_Home_Version
 
                 GWNew.Text = SWText1;
 
-                SWF.Application.OpenForms["LogoFrm"].Close();
+              //  SWF.Application.OpenForms["LogoFrm"].Close();
                     newPort.Write("SA " + SA[i] + "\r");
                     int SAAnalisByteRecieved1 = newPort.ReadBufferSize;
                     Thread.Sleep(100);

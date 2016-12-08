@@ -290,6 +290,7 @@
             this.checkBox1.TabIndex = 37;
             this.checkBox1.Text = "от 428,0 до 582,5";
             this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
             // checkBox2
             // 
@@ -300,6 +301,7 @@
             this.checkBox2.TabIndex = 38;
             this.checkBox2.Text = "от 582,5 до 682,0";
             this.checkBox2.UseVisualStyleBackColor = true;
+            this.checkBox2.CheckedChanged += new System.EventHandler(this.checkBox2_CheckedChanged);
             // 
             // checkBox3
             // 
@@ -310,6 +312,7 @@
             this.checkBox3.TabIndex = 39;
             this.checkBox3.Text = "от 682,0 до 688,0";
             this.checkBox3.UseVisualStyleBackColor = true;
+            this.checkBox3.CheckedChanged += new System.EventHandler(this.checkBox3_CheckedChanged);
             // 
             // textBox1
             // 

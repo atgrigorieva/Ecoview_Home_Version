@@ -241,32 +241,70 @@ namespace Ecoview_Home_Version
         public void SAGE(ref int countSA, ref string GE5_1_0)
         {
             bool message1 = true;
-            countSA = 8;
+            if (versionPribor.Contains('2'))
+            {    countSA = 8; }
+            else
+            {
+                countSA = 4;
+            }
 
-            LogoForm();
+         //   LogoForm();
             //Thread.Sleep(5000);
             newPort.Write("SA " + countSA + "\r");
-            int SAAnalisByteRecieved1 = newPort.ReadBufferSize;
-            Thread.Sleep(100);
-            byte[] SAAnalisBuffer1 = new byte[SAAnalisByteRecieved1];
-            newPort.Read(SAAnalisBuffer1, 0, SAAnalisByteRecieved1);
+            // int SAAnalisByteRecieved1 = newPort.ReadBufferSize;
+            // Thread.Sleep(100);
+            //byte[] SAAnalisBuffer1 = new byte[SAAnalisByteRecieved1];
+            // newPort.Read(SAAnalisBuffer1, 0, SAAnalisByteRecieved1);
+            string indata = newPort.ReadExisting();
+            int indata_zero = 0;
+            string indata_0;
+            bool indata_bool = true;
+            while (indata_bool == true)
+            {
+                
+                if (indata.Contains('>'))
+                {
+
+                    indata_bool = false;
+
+                }
+
+                else {
+                    indata = newPort.ReadExisting();
+
+                }
+            }
 
             newPort.Write("GE 1\r");
 
+            string GE5_1 = "";
             int GEbyteRecieved4_1 = newPort.ReadBufferSize;
-            Thread.Sleep(3500);
             byte[] GEbuffer4_1 = new byte[GEbyteRecieved4_1];
             newPort.Read(GEbuffer4_1, 0, GEbyteRecieved4_1);
-            string GE5_1 = "";
-
-            for (int i_1 = 0; i_1 <= 50; i_1++)
+           
+            indata = newPort.ReadExisting();
+            indata_zero = 0;
+            indata_0 = "";
+            indata_bool = true;
+            while (indata_bool == true)
             {
-                GE5_1 = GE5_1 + Convert.ToChar(GEbuffer4_1[i_1]);
-            }
-            var GEarr4_1 = GE5_1.Split("\r".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+              
+                if (indata.Contains('>'))
+                {
 
-            GE5_1 = GEarr4_1[1];
-            GE5_1_0 = GEarr4_1[1];
+                    indata_bool = false;
+
+                }
+
+                else {
+                    
+                    indata = newPort.ReadExisting();
+                    indata_0 += indata;
+                }
+            }
+
+            GE5_1 = indata_0.Substring(0, indata_0.Length-2);
+            GE5_1_0 = indata_0.Substring(0, indata_0.Length - 2);
             GEText.Text = GE5_1_0;
             double GAText1 = (Convert.ToDouble(GE5_1_0) / Convert.ToDouble(GE5_1_0)) * 100;
 
@@ -281,23 +319,56 @@ namespace Ecoview_Home_Version
                 countSA--;
                 newPort.Write("SA " + countSA + "\r");
                 int SAAnalisByteRecieved1_1_1 = newPort.ReadBufferSize;
-                Thread.Sleep(100);
-                byte[] SAAnalisBuffer1_1_1 = new byte[SAAnalisByteRecieved1_1_1];
-                newPort.Read(SAAnalisBuffer1_1_1, 0, SAAnalisByteRecieved1_1_1);
+                // Thread.Sleep(100);
+                indata = newPort.ReadExisting();
+                indata_zero = 0;
+                indata_0 = "";
+                indata_bool = true;
+                while (indata_bool == true)
+                {
+                   
+                    if (indata.Contains('>'))
+                    {
+
+                        indata_bool = false;
+
+                    }
+
+                    else {
+                        indata = newPort.ReadExisting();
+                    }
+                }
+             //   byte[] SAAnalisBuffer1_1_1 = new byte[SAAnalisByteRecieved1_1_1];
+              //  newPort.Read(SAAnalisBuffer1_1_1, 0, SAAnalisByteRecieved1_1_1);
 
                 newPort.Write("GE 1\r");
-                int GEbyteRecieved4_1_1_1 = newPort.ReadBufferSize;
-                Thread.Sleep(3500);
-                byte[] GEbuffer4_1_1_1 = new byte[GEbyteRecieved4_1_1_1];
-                newPort.Read(GEbuffer4_1_1_1, 0, GEbyteRecieved4_1_1_1);
-                for (int i_1 = 0; i_1 <= 50; i_1++)
-                {
-                    GE5_1 = GE5_1 + Convert.ToChar(GEbuffer4_1_1_1[i_1]);
-                }
-                var GEarr4_1_1_1 = GE5_1.Split("\r".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+               GEbyteRecieved4_1 = newPort.ReadBufferSize;
+               GEbuffer4_1 = new byte[GEbyteRecieved4_1];
+                newPort.Read(GEbuffer4_1, 0, GEbyteRecieved4_1);
 
-                GE5_1 = GEarr4_1_1_1[1];
-                GE5_1_0 = GEarr4_1_1_1[1];
+                indata = newPort.ReadExisting();
+                indata_zero = 0;
+                indata_0 = "";
+                indata_bool = true;
+                while (indata_bool == true)
+                {
+
+                    if (indata.Contains('>'))
+                    {
+
+                        indata_bool = false;
+
+                    }
+
+                    else {
+
+                        indata = newPort.ReadExisting();
+                        indata_0 += indata;
+                    }
+                }
+
+                GE5_1 = indata_0.Substring(0, indata_0.Length - 2);
+                GE5_1_0 = indata_0.Substring(0, indata_0.Length - 2);
                 GEText.Text = GE5_1_0;
 
                 GAText1 = (Convert.ToDouble(GE5_1_0) / Convert.ToDouble(GE5_1_0)) * 100;
@@ -309,7 +380,7 @@ namespace Ecoview_Home_Version
                 OptPlot1 = OptPlot - Math.Truncate(OptPlot);
 
             }
-            SWF.Application.OpenForms["LogoFrm"].Close();
+        //    SWF.Application.OpenForms["LogoFrm"].Close();
 
             if (Izmerenie1 == false)
             {
@@ -342,18 +413,32 @@ namespace Ecoview_Home_Version
             {
                 newPort.Write("GE 1\r");
 
-                int GEbyteRecieved4 = newPort.ReadBufferSize;
-                Thread.Sleep(1500);
-                byte[] GEbuffer4 = new byte[GEbyteRecieved4];
-                newPort.Read(GEbuffer4, 0, GEbyteRecieved4);
-                string GE5 = "";
-                for (int i = 0; i <= 50; i++)
-                {
-                    GE5 = GE5 + Convert.ToChar(GEbuffer4[i]);
-                }
-                var GEarr4 = GE5.Split("\r".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+                int GEbyteRecieved4_1 = newPort.ReadBufferSize;
+                byte[] GEbuffer4_1 = new byte[GEbyteRecieved4_1];
+                newPort.Read(GEbuffer4_1, 0, GEbyteRecieved4_1);
 
-                GE5 = GEarr4[1];
+                string indata = newPort.ReadExisting();
+      
+               string indata_0 = "";
+               bool indata_bool = true;
+                while (indata_bool == true)
+                {
+
+                    if (indata.Contains('>'))
+                    {
+
+                        indata_bool = false;
+
+                    }
+
+                    else {
+
+                        indata = newPort.ReadExisting();
+                        indata_0 += indata;
+                    }
+                }
+                string GE5 = "";
+                GE5 = indata_0.Substring(0, indata_0.Length - 2);
                 GEText.Text = GE5;
 
                 GAText1 = (Convert.ToDouble(GE5) / Convert.ToDouble(GE5_1_0)) * 100;
@@ -1178,10 +1263,12 @@ namespace Ecoview_Home_Version
                         SAGE(ref countSA, ref GE5_1_0);
                         SA1[massEl] = Convert.ToInt32(countSA);
                         GE1[massEl] = Convert.ToInt32(GE5_1_0);
+                        Table2.CurrentCell.Value = string.Format("{0:0.0}", GE1[massEl]);
                         massEl++;
+                        
                     }
                 }
-                  //  Table2.CurrentCell.Value = string.Format("{0:0.0}", GE1[j]);
+                   
                 
                // Thread.Sleep(10000);
       //          IzmerGE();
@@ -1274,29 +1361,62 @@ namespace Ecoview_Home_Version
 
                     GWNew.Text = SWText1;
 
-                  //  SWF.Application.OpenForms["LogoFrm"].Close();
+                    //  SWF.Application.OpenForms["LogoFrm"].Close();
                     newPort.Write("SA " + SA[i] + "\r");
-                    int SAAnalisByteRecieved1 = newPort.ReadBufferSize;
-                    Thread.Sleep(100);
-                    byte[] SAAnalisBuffer1 = new byte[SAAnalisByteRecieved1];
-                    newPort.Read(SAAnalisBuffer1, 0, SAAnalisByteRecieved1);
-                    newPort.Write("GE 1\r");
-                    int GEbyteRecieved4_1 = newPort.ReadBufferSize;
-                    Thread.Sleep(1500);
-                    byte[] GEbuffer4_1 = new byte[GEbyteRecieved4_1];
-                    GE5_1_1 = "";
-                    newPort.Read(GEbuffer4_1, 0, GEbyteRecieved4_1);
-                    for (int i_1 = 0; i_1 <= 50; i_1++)                    {
-                        
-                        GE5_1_1 = GE5_1_1 + Convert.ToChar(GEbuffer4_1[i_1]);
-                    }
-                    var GEarr4_1 = GE5_1_1.Split("\r".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
 
-                    string GE5Izmer = GEarr4_1[1];
+                    indata = newPort.ReadExisting();
+                    string indata_0;
+                    indata_bool = true;
+                    while (indata_bool == true)
+                    {
+
+                        if (indata.Contains('>'))
+                        {
+
+                            indata_bool = false;
+
+                        }
+
+                        else {
+                            indata = newPort.ReadExisting();
+
+                        }
+                    }
+
+                    newPort.Write("GE 1\r");
+
+                    string GE5Izmer = "";
+                    int GEbyteRecieved4_1 = newPort.ReadBufferSize;
+                    byte[] GEbuffer4_1 = new byte[GEbyteRecieved4_1];
+                    newPort.Read(GEbuffer4_1, 0, GEbyteRecieved4_1);
+
+                    indata = newPort.ReadExisting();
+
+                    indata_0 = "";
+                    indata_bool = true;
+                    while (indata_bool == true)
+                    {
+
+                        if (indata.Contains('>'))
+                        {
+
+                            indata_bool = false;
+
+                        }
+
+                        else {
+
+                            indata = newPort.ReadExisting();
+                            indata_0 += indata;
+                        }
+                    }
+                    GE5Izmer = indata_0.Substring(0, indata_0.Length - 2);
+
+
 
                     // MessageBox.Show(GE5Izmer);
-                   // string GE1 = GE[j].ToString();
-                   // double GE1_double = double.Parse(GE1.Replace(".", ","));
+                    // string GE1 = GE[j].ToString();
+                    // double GE1_double = double.Parse(GE1.Replace(".", ","));
                     double Aser = Convert.ToDouble(GE5Izmer) / Convert.ToDouble(GE[i]) * 100;
                     Table1.CurrentCell.Value = string.Format("{0:0.00}", Aser);
                     GEIzmer[i] = Aser;
@@ -1314,7 +1434,7 @@ namespace Ecoview_Home_Version
                     {
                         // GW();
                         Table2.CurrentCell = Table2.Rows[countIzmer1].Cells[j];
-                   //     LogoForm1();
+                        //     LogoForm1();
                         string SWText1 = Table2.Columns[j].HeaderText;
                         double SWText1_double = Convert.ToDouble(SWText1);
                         double GWNew_double = double.Parse(GWNew.Text.Replace(".", ","));
@@ -1323,11 +1443,11 @@ namespace Ecoview_Home_Version
 
 
                         // string GW_string = "";
-                       // int byteRecieved1 = newPort.ReadBufferSize;
+                        // int byteRecieved1 = newPort.ReadBufferSize;
 
                         Thread.Sleep(500);
 
-                       // byte[] buffer1 = new byte[byteRecieved1];
+                        // byte[] buffer1 = new byte[byteRecieved1];
                         string indata = newPort.ReadExisting();
 
                         bool indata_bool = true;
@@ -1348,25 +1468,56 @@ namespace Ecoview_Home_Version
 
                         GWNew.Text = SWText1;
 
-                    //    SWF.Application.OpenForms["LogoFrm"].Close();
+                        //    SWF.Application.OpenForms["LogoFrm"].Close();
                         newPort.Write("SA " + SA1[j] + "\r");
-                        int SAAnalisByteRecieved1 = newPort.ReadBufferSize;
-                        Thread.Sleep(100);
-                        byte[] SAAnalisBuffer1 = new byte[SAAnalisByteRecieved1];
-                        newPort.Read(SAAnalisBuffer1, 0, SAAnalisByteRecieved1);
+
+                        indata = newPort.ReadExisting();
+                        string indata_0;
+                        indata_bool = true;
+                        while (indata_bool == true)
+                        {
+
+                            if (indata.Contains('>'))
+                            {
+
+                                indata_bool = false;
+
+                            }
+
+                            else {
+                                indata = newPort.ReadExisting();
+
+                            }
+                        }
+
                         newPort.Write("GE 1\r");
+
+                        string GE5Izmer = "";
                         int GEbyteRecieved4_1 = newPort.ReadBufferSize;
-                        Thread.Sleep(1500);
                         byte[] GEbuffer4_1 = new byte[GEbyteRecieved4_1];
                         newPort.Read(GEbuffer4_1, 0, GEbyteRecieved4_1);
-                        GE5_1_1 = "";
-                        for (int i_1 = 0; i_1 <= 50; i_1++)
-                        {
-                            GE5_1_1 = GE5_1_1 + Convert.ToChar(GEbuffer4_1[i_1]);
-                        }
-                        var GEarr4_1 = GE5_1_1.Split("\r".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
 
-                        string GE5Izmer = GEarr4_1[1];
+                        indata = newPort.ReadExisting();
+
+                        indata_0 = "";
+                        indata_bool = true;
+                        while (indata_bool == true)
+                        {
+
+                            if (indata.Contains('>'))
+                            {
+
+                                indata_bool = false;
+
+                            }
+
+                            else {
+
+                                indata = newPort.ReadExisting();
+                                indata_0 += indata;
+                            }
+                        }
+                        GE5Izmer = indata_0.Substring(0, indata_0.Length - 2);
 
                         // MessageBox.Show(GE5Izmer);
                         //string GE1 = GE[j+1].ToString();
@@ -1377,10 +1528,12 @@ namespace Ecoview_Home_Version
                     }
                 }
                 else
+                    
                 {
                     for (int j = 2; j <= 4; j++)
                     {
                         // GW();
+
                         Table2.CurrentCell = Table2.Rows[countIzmer1].Cells[j];
                    //     LogoForm1();
                         string SWText1 = Table2.Columns[j].HeaderText;
@@ -1417,30 +1570,65 @@ namespace Ecoview_Home_Version
                         GWNew.Text = SWText1;
 
                   //      SWF.Application.OpenForms["LogoFrm"].Close();
-                        newPort.Write("SA " + SA1[j] + "\r");
-                        int SAAnalisByteRecieved1 = newPort.ReadBufferSize;
-                        Thread.Sleep(100);
-                        byte[] SAAnalisBuffer1 = new byte[SAAnalisByteRecieved1];
-                        newPort.Read(SAAnalisBuffer1, 0, SAAnalisByteRecieved1);
+                        newPort.Write("SA " + SA1[j-2] + "\r");
+                       
+                        // int SAAnalisByteRecieved1 = newPort.ReadBufferSize;
+                        // Thread.Sleep(100);
+                        //byte[] SAAnalisBuffer1 = new byte[SAAnalisByteRecieved1];
+                        // newPort.Read(SAAnalisBuffer1, 0, SAAnalisByteRecieved1);
+                        indata = newPort.ReadExisting();                        
+                        string indata_0;
+                        indata_bool = true;
+                        while (indata_bool == true)
+                        {
+
+                            if (indata.Contains('>'))
+                            {
+
+                                indata_bool = false;
+
+                            }
+
+                            else {
+                                indata = newPort.ReadExisting();
+
+                            }
+                        }
+
                         newPort.Write("GE 1\r");
+                        string GE5Izmer = "";
                         int GEbyteRecieved4_1 = newPort.ReadBufferSize;
-                        Thread.Sleep(3500);
                         byte[] GEbuffer4_1 = new byte[GEbyteRecieved4_1];
                         newPort.Read(GEbuffer4_1, 0, GEbyteRecieved4_1);
-                        GE5_1_1 = "";
-                        for (int i_1 = 0; i_1 <= 50; i_1++)
-                        {
-                            GE5_1_1 = GE5_1_1 + Convert.ToChar(GEbuffer4_1[i_1]);
-                        }
-                        var GEarr4_1 = GE5_1_1.Split("\r".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
 
-                        string GE5Izmer = GEarr4_1[1];
+                        indata = newPort.ReadExisting();
+                       
+                        indata_0 = "";
+                        indata_bool = true;
+                        while (indata_bool == true)
+                        {
+
+                            if (indata.Contains('>'))
+                            {
+
+                                indata_bool = false;
+
+                            }
+
+                            else {
+
+                                indata = newPort.ReadExisting();
+                                indata_0 += indata;
+                            }
+                        }
+                        GE5Izmer = indata_0.Substring(0, indata_0.Length-2);
 
                         // MessageBox.Show(GE5Izmer);
                         //string GE1 = GE[j+1].ToString();
                         //        double GE1_double = double.Parse(GE1.Replace(".", ","));
                         double Aser = Convert.ToDouble(GE5Izmer) / Convert.ToDouble(GE1[massEl]) * 100;
                         Table2.CurrentCell.Value = string.Format("{0:0.00}", Aser);
+                        massEl++;
                         // j--;
                     }
                 
@@ -1490,31 +1678,60 @@ namespace Ecoview_Home_Version
 
                 GWNew.Text = SWText1;
 
-              //  SWF.Application.OpenForms["LogoFrm"].Close();
-                    newPort.Write("SA " + SA[i] + "\r");
-                    int SAAnalisByteRecieved1 = newPort.ReadBufferSize;
-                    Thread.Sleep(100);
-                    byte[] SAAnalisBuffer1 = new byte[SAAnalisByteRecieved1];
-                    newPort.Read(SAAnalisBuffer1, 0, SAAnalisByteRecieved1);
-                    newPort.Write("GE 1\r");
-                    int GEbyteRecieved4_1 = newPort.ReadBufferSize;
-                    Thread.Sleep(1500);
-                    byte[] GEbuffer4_1 = new byte[GEbyteRecieved4_1];
-                    GE5_1_1 = "";
-                    newPort.Read(GEbuffer4_1, 0, GEbyteRecieved4_1);
-                    for (int i_1 = 0; i_1 <= 50; i_1++)
+                //  SWF.Application.OpenForms["LogoFrm"].Close();
+                newPort.Write("SA " + SA[i] + "\r");
+
+                indata = newPort.ReadExisting();
+                string indata_0;
+                indata_bool = true;
+                while (indata_bool == true)
+                {
+
+                    if (indata.Contains('>'))
                     {
 
-                        GE5_1_1 = GE5_1_1 + Convert.ToChar(GEbuffer4_1[i_1]);
+                        indata_bool = false;
+
                     }
-                    var GEarr4_1 = GE5_1_1.Split("\r".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
 
-                    string GE5Izmer = GEarr4_1[1];
+                    else {
+                        indata = newPort.ReadExisting();
 
-                    // MessageBox.Show(GE5Izmer);
-                    // string GE1 = GE[j].ToString();
-                    // double GE1_double = double.Parse(GE1.Replace(".", ","));
-                    double Aser = Convert.ToDouble(GE5Izmer) / Convert.ToDouble(GE[i]) * 100;
+                    }
+                }
+
+                newPort.Write("GE 1\r");
+                string GE5Izmer = "";
+                int GEbyteRecieved4_1 = newPort.ReadBufferSize;
+                byte[] GEbuffer4_1 = new byte[GEbyteRecieved4_1];
+                newPort.Read(GEbuffer4_1, 0, GEbyteRecieved4_1);
+
+                indata = newPort.ReadExisting();
+
+                indata_0 = "";
+                indata_bool = true;
+                while (indata_bool == true)
+                {
+
+                    if (indata.Contains('>'))
+                    {
+
+                        indata_bool = false;
+
+                    }
+
+                    else {
+
+                        indata = newPort.ReadExisting();
+                        indata_0 += indata;
+                    }
+                }
+                GE5Izmer = indata_0.Substring(0, indata_0.Length - 2);
+
+                // MessageBox.Show(GE5Izmer);
+                // string GE1 = GE[j].ToString();
+                // double GE1_double = double.Parse(GE1.Replace(".", ","));
+                double Aser = Convert.ToDouble(GE5Izmer) / Convert.ToDouble(GE[i]) * 100;
                     Table1.CurrentCell.Value = string.Format("{0:0.00}", Aser);
                 GEIzmer[i] = Aser;
                 i++;
@@ -1528,6 +1745,21 @@ namespace Ecoview_Home_Version
         }
 
         private void tabPage2_Click(object sender, EventArgs e)
+        {
+            button4.Enabled = false;
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            button4.Enabled = false;
+        }
+
+        private void checkBox2_CheckedChanged(object sender, EventArgs e)
+        {
+            button4.Enabled = false;
+        }
+
+        private void checkBox3_CheckedChanged(object sender, EventArgs e)
         {
             button4.Enabled = false;
         }

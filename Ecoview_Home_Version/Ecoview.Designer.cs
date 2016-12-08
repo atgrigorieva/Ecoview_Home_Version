@@ -288,7 +288,7 @@
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(112, 17);
             this.checkBox1.TabIndex = 37;
-            this.checkBox1.Text = "от 428,0 до 582,5";
+            this.checkBox1.Text = "от 428,0 до 434,0";
             this.checkBox1.UseVisualStyleBackColor = true;
             this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
@@ -299,7 +299,7 @@
             this.checkBox2.Name = "checkBox2";
             this.checkBox2.Size = new System.Drawing.Size(112, 17);
             this.checkBox2.TabIndex = 38;
-            this.checkBox2.Text = "от 582,5 до 682,0";
+            this.checkBox2.Text = "от 582,5 до 588,5";
             this.checkBox2.UseVisualStyleBackColor = true;
             this.checkBox2.CheckedChanged += new System.EventHandler(this.checkBox2_CheckedChanged);
             // 

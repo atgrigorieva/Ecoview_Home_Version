@@ -280,6 +280,7 @@ namespace Ecoview_Home_Version
             string GE5_1 = "";
             int GEbyteRecieved4_1 = newPort.ReadBufferSize;
             byte[] GEbuffer4_1 = new byte[GEbyteRecieved4_1];
+            //Thread.Sleep(100);
             newPort.Read(GEbuffer4_1, 0, GEbyteRecieved4_1);
            
             indata = newPort.ReadExisting();
@@ -288,23 +289,34 @@ namespace Ecoview_Home_Version
             indata_bool = true;
             while (indata_bool == true)
             {
-              
-                if (indata.Contains('>'))
+                if (indata.Contains('>') && indata_zero == 0)
                 {
-
+                    //    indata_0 = "";
+                    indata_0 = indata.Substring(3);
                     indata_bool = false;
 
                 }
 
                 else {
-                    
-                    indata = newPort.ReadExisting();
-                    indata_0 += indata;
+                    indata_zero++;
+                    if (indata.Contains('>'))
+                    {
+                        //    indata_0 = "";
+                        //  indata_0 = indata;
+                        indata_bool = false;
+
+                    }
+                    else {
+                        indata = newPort.ReadExisting();
+                        indata_0 += indata;
+                    }
+
                 }
             }
-
-            GE5_1 = indata_0.Substring(0, indata_0.Length-2);
-            GE5_1_0 = indata_0.Substring(0, indata_0.Length - 2);
+            Regex regex = new Regex(@"\W");
+            int indata_int = Convert.ToInt32(regex.Replace(indata_0, ""));
+            GE5_1 = indata_int.ToString();
+            GE5_1_0 = indata_int.ToString();
             GEText.Text = GE5_1_0;
             double GAText1 = (Convert.ToDouble(GE5_1_0) / Convert.ToDouble(GE5_1_0)) * 100;
 
@@ -314,7 +326,7 @@ namespace Ecoview_Home_Version
 
             double OptPlot1 = OptPlot - Math.Truncate(OptPlot);
             OptichPlot.Text = string.Format("{0:0.0000}", OptPlot1);
-            while (Convert.ToInt32(GE5_1) > 30000)
+            while (Convert.ToInt32(GE5_1) > 30000 && countSA > 1)
             {
                 countSA--;
                 newPort.Write("SA " + countSA + "\r");
@@ -353,22 +365,35 @@ namespace Ecoview_Home_Version
                 while (indata_bool == true)
                 {
 
-                    if (indata.Contains('>'))
+                    if (indata.Contains('>') && indata_zero == 0)
                     {
-
+                        //    indata_0 = "";
+                        indata_0 = indata.Substring(3);                        
                         indata_bool = false;
 
                     }
 
                     else {
+                        indata_zero++;
+                        if (indata.Contains('>'))
+                        {
+                            //    indata_0 = "";
+                          //  indata_0 = indata;
+                            indata_bool = false;
 
-                        indata = newPort.ReadExisting();
-                        indata_0 += indata;
+                        }
+                        else {
+                            indata = newPort.ReadExisting();
+                            indata_0 += indata;
+                        }
+                        
                     }
                 }
 
-                GE5_1 = indata_0.Substring(0, indata_0.Length - 2);
-                GE5_1_0 = indata_0.Substring(0, indata_0.Length - 2);
+                regex = new Regex(@"\W");
+                indata_int = Convert.ToInt32(regex.Replace(indata_0, ""));
+                GE5_1 = indata_int.ToString();
+                GE5_1_0 = indata_int.ToString();
                 GEText.Text = GE5_1_0;
 
                 GAText1 = (Convert.ToDouble(GE5_1_0) / Convert.ToDouble(GE5_1_0)) * 100;
@@ -458,10 +483,25 @@ namespace Ecoview_Home_Version
             {
                 char[] ClosePribor = { Convert.ToChar('Q'), Convert.ToChar('U'), Convert.ToChar('\r') };
                 newPort.Write("QU\r");
-                int QU = newPort.ReadBufferSize;
-                Thread.Sleep(100);
-                byte[] QUBuffer1 = new byte[QU];
-                newPort.Read(QUBuffer1, 0, QU);
+                Thread.Sleep(500);
+                //  byte[] buffer1 = new byte[byteRecieved1];
+                string indata = newPort.ReadExisting();
+
+                bool indata_bool = true;
+                while (indata_bool == true)
+                {
+                    if (indata.Contains('>'))
+                    {
+
+                        indata_bool = false;
+
+                    }
+
+                    else {
+                        indata = newPort.ReadExisting();
+                    }
+                }
+
                 GWNew.Text = null;
                 GEText.Text = null;
                 GAText.Text = null;
@@ -489,10 +529,25 @@ namespace Ecoview_Home_Version
             {
                 char[] ClosePribor = { Convert.ToChar('Q'), Convert.ToChar('U'), Convert.ToChar('\r') };
                 newPort.Write("QU\r");
-                int QU = newPort.ReadBufferSize;
-                Thread.Sleep(100);
-                byte[] QUBuffer1 = new byte[QU];
-                newPort.Read(QUBuffer1, 0, QU);
+                Thread.Sleep(500);
+                //  byte[] buffer1 = new byte[byteRecieved1];
+                string indata = newPort.ReadExisting();
+
+                bool indata_bool = true;
+                while (indata_bool == true)
+                {
+                    if (indata.Contains('>'))
+                    {
+
+                        indata_bool = false;
+
+                    }
+
+                    else {
+                        indata = newPort.ReadExisting();
+                    }
+                }
+
                 newPort.Close();
             }
             else
@@ -1189,13 +1244,9 @@ namespace Ecoview_Home_Version
                         string SWText1 = Table2.Columns[j].HeaderText;
                         double SWText1_double = Convert.ToDouble(SWText1);
                         GWNew_double = double.Parse(GWNew.Text.Replace(".", ","));
-                        newPort.Write("SW " + SWText1 + "\r");
-                        //  double raznica = SWText1_double - GWNew_double;
-
-                        // string GW_string = "";
-                       // int byteRecieved1 = newPort.ReadBufferSize;
+                        newPort.Write("SW " + SWText1 + "\r");                       
                         Thread.Sleep(500);
-                       // byte[] buffer1 = new byte[byteRecieved1];
+                  
                        string indata = newPort.ReadExisting();
 
                         bool indata_bool = true;
@@ -1517,7 +1568,8 @@ namespace Ecoview_Home_Version
                                 indata_0 += indata;
                             }
                         }
-                        GE5Izmer = indata_0.Substring(0, indata_0.Length - 2);
+                        Regex regex = new Regex(@"\W");
+                        GE5Izmer = regex.Replace(indata_0, "");
 
                         // MessageBox.Show(GE5Izmer);
                         //string GE1 = GE[j+1].ToString();
@@ -1621,7 +1673,8 @@ namespace Ecoview_Home_Version
                                 indata_0 += indata;
                             }
                         }
-                        GE5Izmer = indata_0.Substring(0, indata_0.Length-2);
+                        Regex regex = new Regex(@"\W");
+                        GE5Izmer = regex.Replace(indata_0, "");
 
                         // MessageBox.Show(GE5Izmer);
                         //string GE1 = GE[j+1].ToString();
@@ -1726,7 +1779,8 @@ namespace Ecoview_Home_Version
                         indata_0 += indata;
                     }
                 }
-                GE5Izmer = indata_0.Substring(0, indata_0.Length - 2);
+                Regex regex = new Regex(@"\W");                
+                GE5Izmer = regex.Replace(indata_0, "");
 
                 // MessageBox.Show(GE5Izmer);
                 // string GE1 = GE[j].ToString();

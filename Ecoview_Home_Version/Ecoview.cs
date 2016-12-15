@@ -407,10 +407,10 @@ namespace Ecoview_Home_Version
             }
         //    SWF.Application.OpenForms["LogoFrm"].Close();
 
-            if (Izmerenie1 == false)
+          /*  if (Izmerenie1 == false)
             {
                 InitializeTimer();
-            }
+            }*/
         }
         public void InitializeTimer()
         {
@@ -1191,7 +1191,7 @@ namespace Ecoview_Home_Version
                     string SWText1 = Table1.Columns[j].HeaderText;
                     double SWText1_double = Convert.ToDouble(SWText1);
                     double GWNew_double = double.Parse(GWNew.Text.Replace(".", ","));
-                    newPort.Write("SW " + SWText1 + "\r");
+                    newPort.Write("SW " + SWText1_double.ToString(System.Globalization.CultureInfo.GetCultureInfo("en-US")) + "\r");
   
                    // int byteRecieved1 = newPort.ReadBufferSize;
                     Thread.Sleep(500);
@@ -1244,7 +1244,7 @@ namespace Ecoview_Home_Version
                         string SWText1 = Table2.Columns[j].HeaderText;
                         double SWText1_double = Convert.ToDouble(SWText1);
                         GWNew_double = double.Parse(GWNew.Text.Replace(".", ","));
-                        newPort.Write("SW " + SWText1 + "\r");                       
+                        newPort.Write("SW " + SWText1_double.ToString(System.Globalization.CultureInfo.GetCultureInfo("en-US")) + "\r");                       
                         Thread.Sleep(500);
                   
                        string indata = newPort.ReadExisting();
@@ -1283,7 +1283,7 @@ namespace Ecoview_Home_Version
                         string SWText1 = Table2.Columns[j].HeaderText;
                         double SWText1_double = Convert.ToDouble(SWText1);
                         GWNew_double = double.Parse(GWNew.Text.Replace(".", ","));
-                        newPort.Write("SW " + SWText1 + "\r");
+                        newPort.Write("SW " + SWText1_double.ToString(System.Globalization.CultureInfo.GetCultureInfo("en-US")) + "\r");
                         //  double raznica = SWText1_double - GWNew_double;
 
                         // string GW_string = "";
@@ -1336,7 +1336,7 @@ namespace Ecoview_Home_Version
                 string SWText1 = Table1.Columns[j].HeaderText;
                 double SWText1_double = Convert.ToDouble(SWText1);
                 double GWNew_double = double.Parse(GWNew.Text.Replace(".", ","));
-                newPort.Write("SW " + SWText1 + "\r");
+                newPort.Write("SW " + SWText1_double.ToString(System.Globalization.CultureInfo.GetCultureInfo("en-US")) + "\r");
       
                 // string GW_string = "";
                // int byteRecieved1 = newPort.ReadBufferSize;
@@ -1386,7 +1386,7 @@ namespace Ecoview_Home_Version
                     string SWText1 = Table1.Columns[j].HeaderText;
                     double SWText1_double = Convert.ToDouble(SWText1);
                     double GWNew_double = double.Parse(GWNew.Text.Replace(".", ","));
-                    newPort.Write("SW " + SWText1 + "\r");
+                    newPort.Write("SW " + SWText1_double.ToString(System.Globalization.CultureInfo.GetCultureInfo("en-US")) + "\r");
 
                     // string GW_string = "";
                    // int byteRecieved1 = newPort.ReadBufferSize;
@@ -1490,7 +1490,7 @@ namespace Ecoview_Home_Version
                         double SWText1_double = Convert.ToDouble(SWText1);
                         double GWNew_double = double.Parse(GWNew.Text.Replace(".", ","));
                         double raznica = SWText1_double - GWNew_double;
-                        newPort.Write("SW " + SWText1 + "\r");
+                        newPort.Write("SW " + SWText1_double.ToString(System.Globalization.CultureInfo.GetCultureInfo("en-US")) + "\r");
 
 
                         // string GW_string = "";
@@ -1592,7 +1592,7 @@ namespace Ecoview_Home_Version
                         double SWText1_double = Convert.ToDouble(SWText1);
                         double GWNew_double = double.Parse(GWNew.Text.Replace(".", ","));
                         double raznica = SWText1_double - GWNew_double;
-                        newPort.Write("SW " + SWText1 + "\r");
+                        newPort.Write("SW " + SWText1_double.ToString(System.Globalization.CultureInfo.GetCultureInfo("en-US")) + "\r");
 
 
                         // string GW_string = "";
@@ -1705,7 +1705,7 @@ namespace Ecoview_Home_Version
                     string SWText1 = Table1.Columns[j].HeaderText;
                     double SWText1_double = Convert.ToDouble(SWText1);
                     double GWNew_double = double.Parse(GWNew.Text.Replace(".", ","));
-                    newPort.Write("SW " + SWText1 + "\r");
+                    newPort.Write("SW " + SWText1_double.ToString(System.Globalization.CultureInfo.GetCultureInfo("en-US")) + "\r");
                    
                     // string GW_string = "";
                     //int byteRecieved1 = newPort.ReadBufferSize;
